@@ -6,6 +6,7 @@ import { projects, skills } from "./data/portfolioData";
 import ProjectsSection from "./components/Sections/ProjectsSection";
 import ContactSection from "./components/Sections/ContactSection";
 import BackgroundEffect from "./components/UI/BackgroundEffect";
+import { t } from "./translations/translator";
 
 const App = () => {
   const [activeSection, setActiveSection] = useState<string>("home");
@@ -46,7 +47,7 @@ const App = () => {
       <div className="container mx-auto py-16 px-6 md:pl-24 min-h-screen flex items-center">
         <main className="w-full backdrop-blur-sm bg-gray-900 bg-opacity-40 rounded-2xl p-6 md:p-10 shadow-2xl border border-gray-800">
           <div className="max-w-xl mx-auto  p-8 bg-white text-gray-800 rounded-2xl shadow-lg text-center text-xl font-semibold font-mono">
-            🚧 <span className="block text-2xl mb-2">In development...</span>
+            🚧 <span className="block text-2xl mb-2">{t("app.inDevelopment")}...</span>
           </div>
           {/*  {activeSection === "home" && <HomeSection />}
           {activeSection === "projects" && (
