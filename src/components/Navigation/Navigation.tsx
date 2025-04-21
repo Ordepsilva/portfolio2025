@@ -20,7 +20,9 @@ const Navigation = ({
   return (
     <>
       <button
-        className="fixed top-4 right-4 z-50 p-2 bg-gray-800 rounded-full md:hidden"
+        className={`fixed top-4 right-4 z-50 p-2 rounded-full md:hidden ${
+          isMenuOpen ? "bg-gray-800" : ""
+        }`}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         <div className="w-6 h-0.5 bg-white mb-1.5" />
@@ -31,26 +33,28 @@ const Navigation = ({
       <nav
         className={`fixed z-40 transition-all duration-300 ${
           isMenuOpen
-            ? "top-0 right-0 h-screen w-64 bg-gray-800"
-            : "top-0 right-0 h-screen w-16 md:w-16 lg:w-20 bg-gray-800"
+            ? "top-0 right-0 h-screen w-full bg-gray-800"
+            : "top-0 right-0 h-screen  md:w-16 lg:w-20 bg-gray-800"
         } md:top-0 md:right-0 md:h-screen md:block`}
       >
-        <div className="text-white text-center mt-4">
-          <select
-            className="appearance-none bg-transparent text-white cursor-pointer hover:text-gray-300 focus:outline-none"
-            onChange={(e) => setLanguage(e.target.value as "en" | "pt")}
-            value={language}
-          >
-            {languages.map((lang) => (
-              <option
-                key={lang}
-                value={lang}
-                className="bg-gray-800 text-white hover:bg-gray-700"
-              >
-                {lang.toLocaleUpperCase()}
-              </option>
-            ))}
-          </select>
+        <div
+          className={`text-white text-center mt-4 flex justify-center space-x-4 ${
+            isMenuOpen ? "block" : "hidden md:block"
+          }`}
+        >
+          {languages.map((lang) => (
+            <button
+              key={lang}
+              onClick={() => setLanguage(lang as "en" | "pt")}
+              className={`relative ${
+          language === lang
+            ? "text-white after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-white after:bottom-0 after:left-0"
+            : "text-gray-400 hover:text-white"
+              }`}
+            >
+              {lang.toLocaleUpperCase()}
+            </button>
+          ))}
         </div>
         <div
           className={`flex flex-col items-center h-full py-16 ${
